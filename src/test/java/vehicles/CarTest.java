@@ -49,4 +49,16 @@ public class CarTest {
     public void canGetTyreSize() {
         assertEquals(17.0, car.getTyres().getSize());
     }
+
+    @Test
+    public void canAdjustForDamage() {
+        car.addDamage(1000);
+        assertEquals(39000, car.getPrice());
+    }
+
+    @Test
+    public void canAdjustForRepair(){
+        car.addRepair(1000);
+        assertEquals(41000, car.getPrice());
+    }
 }
