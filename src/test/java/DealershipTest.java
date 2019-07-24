@@ -28,7 +28,7 @@ public class DealershipTest {
     @Before
     public void before(){
         dealer = new Dealer("Arnold CodeClan");
-        customer = new Customer("Laura");
+        customer = new Customer("Laura", 50000);
         till = new Till("Till 1");
         dealership = new Dealership(dealer, customer, till);
         engine = new Engine("BMW", 2.0);
@@ -37,6 +37,11 @@ public class DealershipTest {
         hybridCar = new HybridCar(ColourType.BLACK, 40000, engine, tyres);
         electricCar = new ElectricCar(ColourType.BLACK, 40000, engine, tyres);
 
+    }
+
+    @Test
+    public void canGetCarPrice() {
+        assertEquals(40000, car.getPrice());
     }
 
     @Test
@@ -50,5 +55,30 @@ public class DealershipTest {
        dealership.addCarToDealership(hybridCar);
        dealership.addCarToDealership(electricCar);
        assertEquals(3, dealership.getNumberOfCars());
+    }
+
+    @Test
+    public void canRemoveCarFromDealership() {
+        dealership.addCarToDealership(car);
+        dealership.addCarToDealership(hybridCar);
+        dealership.addCarToDealership(electricCar);
+        dealership.removerCarFromDealership();
+        assertEquals(2, dealership.getNumberOfCars());
+    }
+
+    @Test
+    public void canSellACar() {
+        dealership.addCarToDealership(car);
+        dealership.addCarToDealership(hybridCar);
+        dealership.addCarToDealership(electricCar);
+        dealership.removerCarFromDealership();
+        assertEquals(2, dealership.getNumberOfCars());
+        till.addToBalance(car.getPrice());
+        customer.reduceBudget(car.getPrice());
+        customer.addCarToCustomer(car);
+        assertEquals(140000, till.getTillBalance());
+        assertEquals(10000, customer.getBudget());
+        assertEquals(1, customer.countCustomerCars());
+
     }
 }

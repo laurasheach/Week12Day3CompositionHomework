@@ -2,6 +2,7 @@ import behaviours.ICar;
 import dealership.Customer;
 import dealership.Dealer;
 import dealership.Till;
+import vehicles.Vehicle;
 
 import java.util.ArrayList;
 
@@ -41,5 +42,17 @@ public class Dealership {
 
     public void addCarToDealership(ICar car){
         this.cars.add(car);
+    }
+
+    public void removerCarFromDealership(){
+        this.cars.remove(0);
+    }
+
+    public void sellCarToCustomer(ICar car){
+        Vehicle vehicle = null;
+        removerCarFromDealership();
+        customer.addCarToCustomer(car);
+        customer.reduceBudget(vehicle.getPrice());
+        till.addToBalance(vehicle.getPrice());
     }
 }

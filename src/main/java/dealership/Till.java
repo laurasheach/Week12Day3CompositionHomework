@@ -6,6 +6,18 @@ public class Till extends Administration {
 
     public Till(String name) {
         super(name);
-        this.balance = 0;
+        this.balance = 100000;
+    }
+
+    public int getTillBalance() {
+        return this.balance;
+    }
+
+    public int addToBalance(int cash){
+        return this.balance = this.balance + cash;
+    }
+
+    public int reduceBalance(int cash){
+        return this.balance = this.balance - cash;
     }
 }

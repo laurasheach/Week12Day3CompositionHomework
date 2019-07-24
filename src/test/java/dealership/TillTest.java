@@ -18,4 +18,21 @@ public class TillTest {
     public void canGetName() {
         assertEquals("Till 1", till.getName());
     }
+
+    @Test
+    public void canGetTillBalance() {
+        assertEquals(100000, till.getTillBalance());
+    }
+
+    @Test
+    public void canAddToTill() {
+        till.addToBalance(10000);
+        assertEquals(110000, till.getTillBalance());
+    }
+
+    @Test
+    public void canReduceTill() {
+        till.reduceBalance(10000);
+        assertEquals(90000, till.getTillBalance());
+    }
 }
