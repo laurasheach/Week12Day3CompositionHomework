@@ -62,7 +62,7 @@ public class DealershipTest {
         dealership.addCarToDealership(car);
         dealership.addCarToDealership(hybridCar);
         dealership.addCarToDealership(electricCar);
-        dealership.removerCarFromDealership();
+        dealership.removeCarFromDealership(car);
         assertEquals(2, dealership.getNumberOfCars());
     }
 
@@ -71,14 +71,18 @@ public class DealershipTest {
         dealership.addCarToDealership(car);
         dealership.addCarToDealership(hybridCar);
         dealership.addCarToDealership(electricCar);
-        dealership.removerCarFromDealership();
+        dealership.sellCarToCustomer(car);
         assertEquals(2, dealership.getNumberOfCars());
-        till.addToBalance(car.getPrice());
-        customer.reduceBudget(car.getPrice());
-        customer.addCarToCustomer(car);
         assertEquals(140000, till.getTillBalance());
         assertEquals(10000, customer.getBudget());
         assertEquals(1, customer.countCustomerCars());
 
+    }
+
+    @Test
+    public void canBuyACar() {
+        dealership.buyACar(car);
+        assertEquals(1, dealership.getNumberOfCars());
+        assertEquals(60000, till.getTillBalance());
     }
 }
